@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import SketchBook from './SketchBook';
+import SketchBook from './sketchBook';
 import ImageDisplayHeader from './imageDisplayHeader';
 
 const ImageDisplay = () => {
@@ -24,7 +24,10 @@ const ImageDisplay = () => {
   let clearButton, downloadButton;
 
   if (image.length > 0) {
-    const clearImage = () => updateImage("");
+    const clearImage = () => {
+      updateImage("");
+      updateDisplayFrame(false);
+    };
     clearButton = <i onClick={clearImage} className="material-icons">delete_outline</i>
     downloadButton = <a href={image} download={"image.jpg"} className="material-icons">save_alt</a>;
   }
