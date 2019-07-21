@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import ImageCanvas from './imageCanvas';
+import SketchBook from './SketchBook';
 import ImageDisplayHeader from './imageDisplayHeader';
 
 const ImageDisplay = () => {
@@ -38,7 +38,7 @@ const ImageDisplay = () => {
           <input onChange={useDisplayNewImage} type="file" id="file" accept="jpg gif" />
         </div>
       </div>
-      <ImageCanvas
+      <SketchBook
         imageSrc={image}
         clearButton={clearButton}
         downloadButton={downloadButton}

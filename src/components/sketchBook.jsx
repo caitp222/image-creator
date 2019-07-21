@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ImageCanvas = (props) => {
+const SketchBook = (props) => {
   const {
     imageSrc,
     downloadButton,
@@ -13,6 +13,15 @@ const ImageCanvas = (props) => {
 
   return(
     <div>
+      {
+        displayFrame ?
+        <img
+          id="frame"
+          className="stacked-images"
+          src={'http://tanamen.com/img/d_default/gold-frame-border-png/gold-frame-border-png-transparent-background-5c74a15d2a132.png'}
+        /> :
+        null
+      }
       <div className="row">
         <div className="col s12 m7">
           <div className="card">
@@ -22,15 +31,6 @@ const ImageCanvas = (props) => {
                 className="stacked-images"
                 src={imageSrc}
               />
-              {
-                displayFrame ?
-                  <img
-                    id="frame"
-                    className="stacked-images"
-                    src={'https://www.pngfind.com/pngs/m/80-804703_ornate-picture-frame-png-arc-studios-gallery-transparent.png'}
-                  /> :
-                  null
-              }
               <span className="card-title">
                 <div className="file-field input-field">
                   <i className="material-icons">add_a_photo</i>
@@ -52,4 +52,4 @@ const ImageCanvas = (props) => {
   )
 };
 
-export default ImageCanvas;
+export default SketchBook;
