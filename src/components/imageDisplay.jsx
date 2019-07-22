@@ -7,6 +7,7 @@ const ImageDisplay = () => {
   const [ image, updateImage ] = useState(defaultImage);
   const [ displayFrame, updateDisplayFrame ] = useState(true);
   const [ displaySmiley, updateDisplaySmiley ] = useState(true);
+  const [ smileyLocation, updateSmileyLocation ] = useState([160,160]);
 
   const useDisplayNewImage = () => {
     const reader = new FileReader();
@@ -23,9 +24,14 @@ const ImageDisplay = () => {
     updateDisplayFrame(!displayFrame);
   }
 
+  const useToggleDisplaySmiley = () => {
+    updateDisplaySmiley(!displaySmiley);
+  }
+
   const downloadImage = () => {
     const image = document.querySelector('#image');
     const frame = document.querySelector('#frame');
+    const smiley = document.querySelector('#smiley');
     const canvas = document.createElement('canvas');
     canvas.height = displayFrame ? frame.height : image.height;
     canvas.width = displayFrame ? frame.width : image.width;
@@ -35,15 +41,28 @@ const ImageDisplay = () => {
       0,
       0,
       image.offsetWidth,
-      image.offsetHeight
+      image.offsetHeight,
     );
+    if (displaySmiley) {
+      context.drawImage(
+        smiley,
+        0,
+        0,
+        smiley.naturalWidth,
+        smiley.naturalHeight,
+        smileyLocation[0],
+        smileyLocation[1],
+        smiley.offsetWidth,
+        smiley.offsetHeight,
+      )
+    }
     if (displayFrame) {
       context.drawImage(
         frame,
         0,
         0,
         frame.offsetWidth,
-        frame.offsetHeight
+        frame.offsetHeight,
       );
     }
     const link = document.createElement('a');
@@ -79,6 +98,10 @@ const ImageDisplay = () => {
         useDisplayNewImage={useDisplayNewImage}
         displayFrame={displayFrame}
         useToggleDisplayFrame={useToggleDisplayFrame}
+        displaySmiley={displaySmiley}
+        useToggleDisplaySmiley={useToggleDisplaySmiley}
+        smileyLocation={smileyLocation}
+        updateSmileyLocation={updateSmileyLocation}
       />
     </Fragment>
   )

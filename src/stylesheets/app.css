@@ -35,6 +35,11 @@
   max-width: 100%;
 }
 
+#smiley {
+  z-index: 90;
+  max-width: 10%;
+}
+
 #tools {
   padding: 10px;
 }
