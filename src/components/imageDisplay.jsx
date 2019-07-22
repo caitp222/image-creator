@@ -6,6 +6,7 @@ import defaultImage from '../../public/images/defaultImage.jpeg';
 const ImageDisplay = () => {
   const [ image, updateImage ] = useState(defaultImage);
   const [ displayFrame, updateDisplayFrame ] = useState(true);
+  const [ displaySmiley, updateDisplaySmiley ] = useState(true);
 
   const useDisplayNewImage = () => {
     const reader = new FileReader();
