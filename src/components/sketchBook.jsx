@@ -1,5 +1,7 @@
 import React from 'react'
 import ImageCanvas from './imageCanvas';
+import ToolBar from './toolBar';
+import FooterControls from './footerControls';
 
 const SketchBook = (props) => {
   const {
@@ -26,30 +28,16 @@ const SketchBook = (props) => {
           updateSmileyLocation={updateSmileyLocation}
         />
       </div>
-      <div id="tools" className="card">
-        <a
-          onClick={useToggleDisplayFrame}
-          className="waves-effect waves-light btn-small"
-        >
-        {
-          displayFrame ?
-          "Remove Frame" :
-          "Add Frame"
-        }
-        </a>
-        <a
-          onClick={useToggleDisplaySmiley}
-          className="waves-effect waves-light btn-small"
-        >
-        {
-          displaySmiley ?
-          "Remove Smiley" :
-          "Add Smiley"
-        }
-        </a>
-      </div>
-      {clearButton}
-      {downloadButton}
+      <ToolBar
+        displayFrame={displayFrame}
+        displaySmiley={displaySmiley}
+        useToggleDisplayFrame={useToggleDisplayFrame}
+        useToggleDisplaySmiley={useToggleDisplaySmiley}
+      />
+      <FooterControls
+        clearButton={clearButton}
+        downloadButton={downloadButton}
+      />
     </div>
   )
 };
