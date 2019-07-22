@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import SketchBook from './sketchBook';
 import ImageDisplayHeader from './imageDisplayHeader';
+import FileUpload from './fileUpload';
+import Icon from './miniComponents/icon';
 import defaultImage from '../../public/images/defaultImage.jpeg';
 
 const ImageDisplay = () => {
@@ -78,19 +80,16 @@ const ImageDisplay = () => {
       updateImage("");
       updateDisplayFrame(false);
     };
-    clearButton = <i onClick={clearImage} className="material-icons">delete_outline</i>
-    downloadButton = <i onClick={downloadImage} className="material-icons">save_alt</i>;
+    clearButton = <Icon onClick={clearImage} innerText={"delete_outline"} />;
+    downloadButton = <Icon onClick={downloadImage} innerText={"save_alt"} />;
   }
 
   return(
     <Fragment>
       <ImageDisplayHeader />
-      <div id="icon-row">
-        <div className="file-field input-field">
-          <i className="material-icons">add_a_photo</i>
-          <input onChange={useDisplayNewImage} type="file" id="file" accept="jpg gif" />
-        </div>
-      </div>
+      <FileUpload
+        useDisplayNewImage={useDisplayNewImage}
+      />
       <SketchBook
         imageSrc={image}
         clearButton={clearButton}
