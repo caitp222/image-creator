@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
 import SketchBook from './sketchBook';
 import ImageDisplayHeader from './imageDisplayHeader';
+import defaultImage from '../../public/images/defaultImage.jpeg';
 
 const ImageDisplay = () => {
-  const [ image, updateImage ] = useState("https://images.squarespace-cdn.com/content/v1/531d09e9e4b025f65847ba91/1548005908980-2P5870ROH4E18WDL1I87/ke17ZwdGBToddI8pDm48kDqFA6F2bdj-odyieWaIIzV7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1Ue4ISNS0LB8b7S_RzFTzjXasR14DQkyTwibcWsfKbwqmujUcYgnCrl657jva-OwOHQ/L4177R2-R01-014.Jpg?format=1000w");
+  const [ image, updateImage ] = useState(defaultImage);
   const [ displayFrame, updateDisplayFrame ] = useState(true);
 
   const useDisplayNewImage = () => {
@@ -21,6 +22,35 @@ const ImageDisplay = () => {
     updateDisplayFrame(!displayFrame);
   }
 
+  const downloadImage = () => {
+    const image = document.querySelector('#image');
+    const frame = document.querySelector('#frame');
+    const canvas = document.createElement('canvas');
+    canvas.height = displayFrame ? frame.height : image.height;
+    canvas.width = displayFrame ? frame.width : image.width;
+    const context = canvas.getContext('2d');
+    context.drawImage(
+      image,
+      0,
+      0,
+      image.offsetWidth,
+      image.offsetHeight
+    );
+    if (displayFrame) {
+      context.drawImage(
+        frame,
+        0,
+        0,
+        frame.offsetWidth,
+        frame.offsetHeight
+      );
+    }
+    const link = document.createElement('a');
+    link.download = 'image.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  };
+
   let clearButton, downloadButton;
 
   if (image.length > 0) {
@@ -29,7 +59,7 @@ const ImageDisplay = () => {
       updateDisplayFrame(false);
     };
     clearButton = <i onClick={clearImage} className="material-icons">delete_outline</i>
-    downloadButton = <a href={image} download={"image.jpg"} className="material-icons">save_alt</a>;
+    downloadButton = <i onClick={downloadImage} className="material-icons">save_alt</i>;
   }
 
   return(

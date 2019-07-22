@@ -12,26 +12,27 @@ const SketchBook = (props) => {
   } = props;
 
   return(
-    <div>
-      <div className="row">
-        <div className="col s12 m7">
-          <div className="card">
-            <div className="card-image">
-              <ImageCanvas
-                imageSrc={imageSrc}
-                displayFrame={displayFrame}
-              />
-            </div>
-            <div className="card-action">
-              <a href="#" onClick={useToggleDisplayFrame}>{displayFrame ? "Remove Frame" : "Add Frame"}</a>
-            </div>
-            <div className="card-content">
-              {clearButton}
-              {downloadButton}
-            </div>
-          </div>
-        </div>
+    <div className="flex-container">
+      <div id="image-canvas" className="card">
+        <ImageCanvas
+          imageSrc={imageSrc}
+          displayFrame={displayFrame}
+        />
       </div>
+      <div id="tools" className="card">
+        <a
+          onClick={useToggleDisplayFrame}
+          className="waves-effect waves-light btn-small"
+        >
+        {
+          displayFrame ?
+          "Remove Frame" :
+          "Add Frame"
+        }
+        </a>
+      </div>
+      {clearButton}
+      {downloadButton}
     </div>
   )
 };
