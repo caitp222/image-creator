@@ -8,7 +8,11 @@ const SketchBook = (props) => {
     clearButton,
     useDisplayNewImage,
     displayFrame,
-    useToggleDisplayFrame
+    useToggleDisplayFrame,
+    displaySmiley,
+    useToggleDisplaySmiley,
+    smileyLocation,
+    updateSmileyLocation
   } = props;
 
   return(
@@ -17,6 +21,9 @@ const SketchBook = (props) => {
         <ImageCanvas
           imageSrc={imageSrc}
           displayFrame={displayFrame}
+          displaySmiley={displaySmiley}
+          smileyLocation={smileyLocation}
+          updateSmileyLocation={updateSmileyLocation}
         />
       </div>
       <div id="tools" className="card">
@@ -28,6 +35,16 @@ const SketchBook = (props) => {
           displayFrame ?
           "Remove Frame" :
           "Add Frame"
+        }
+        </a>
+        <a
+          onClick={useToggleDisplaySmiley}
+          className="waves-effect waves-light btn-small"
+        >
+        {
+          displaySmiley ?
+          "Remove Smiley" :
+          "Add Smiley"
         }
         </a>
       </div>
