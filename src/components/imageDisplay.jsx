@@ -4,12 +4,14 @@ import ImageDisplayHeader from './imageDisplayHeader';
 import FileUpload from './fileUpload';
 import Icon from './miniComponents/icon';
 import defaultImage from '../../public/images/defaultImage.jpeg';
+import * as ImageHelpers from '../helpers/imageHelpers';
 
 const ImageDisplay = () => {
   const [ image, updateImage ] = useState(defaultImage);
   const [ displayFrame, updateDisplayFrame ] = useState(true);
   const [ displaySmiley, updateDisplaySmiley ] = useState(true);
   const [ smileyLocation, updateSmileyLocation ] = useState([160,160]);
+  const [ isDrawing, updateIsDrawing ] = useState(false);
 
   const useDisplayNewImage = () => {
     const reader = new FileReader();
@@ -30,48 +32,9 @@ const ImageDisplay = () => {
     updateDisplaySmiley(!displaySmiley);
   }
 
-  const downloadImage = () => {
-    const image = document.querySelector('#image');
-    const frame = document.querySelector('#frame');
-    const smiley = document.querySelector('#smiley');
-    const canvas = document.createElement('canvas');
-    canvas.height = displayFrame ? frame.height : image.height;
-    canvas.width = displayFrame ? frame.width : image.width;
-    const context = canvas.getContext('2d');
-    context.drawImage(
-      image,
-      0,
-      0,
-      image.offsetWidth,
-      image.offsetHeight,
-    );
-    if (displaySmiley) {
-      context.drawImage(
-        smiley,
-        0,
-        0,
-        smiley.naturalWidth,
-        smiley.naturalHeight,
-        smileyLocation[0],
-        smileyLocation[1],
-        smiley.offsetWidth,
-        smiley.offsetHeight,
-      )
-    }
-    if (displayFrame) {
-      context.drawImage(
-        frame,
-        0,
-        0,
-        frame.offsetWidth,
-        frame.offsetHeight,
-      );
-    }
-    const link = document.createElement('a');
-    link.download = 'image.png';
-    link.href = canvas.toDataURL();
-    link.click();
-  };
+  const toggleIsDrawing = () => {
+    updateIsDrawing(!isDrawing);
+  }
 
   let clearButton, downloadButton;
 
@@ -81,7 +44,7 @@ const ImageDisplay = () => {
       updateDisplayFrame(false);
     };
     clearButton = <Icon onClick={clearImage} innerText={"delete_outline"} />;
-    downloadButton = <Icon onClick={downloadImage} innerText={"save_alt"} />;
+    downloadButton = <Icon onClick={ImageHelpers.downloadImage} innerText={"save_alt"} />;
   }
 
   return(
@@ -101,6 +64,8 @@ const ImageDisplay = () => {
         useToggleDisplaySmiley={useToggleDisplaySmiley}
         smileyLocation={smileyLocation}
         updateSmileyLocation={updateSmileyLocation}
+        isDrawing={isDrawing}
+        toggleIsDrawing={toggleIsDrawing}
       />
     </Fragment>
   )
