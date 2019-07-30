@@ -14,7 +14,9 @@ const SketchBook = (props) => {
     displaySmiley,
     useToggleDisplaySmiley,
     smileyLocation,
-    updateSmileyLocation
+    updateSmileyLocation,
+    isDrawing,
+    toggleIsDrawing
   } = props;
 
   return(
@@ -26,6 +28,7 @@ const SketchBook = (props) => {
           displaySmiley={displaySmiley}
           smileyLocation={smileyLocation}
           updateSmileyLocation={updateSmileyLocation}
+          isDrawing={isDrawing}
         />
       </div>
       <ToolBar
@@ -33,6 +36,8 @@ const SketchBook = (props) => {
         displaySmiley={displaySmiley}
         useToggleDisplayFrame={useToggleDisplayFrame}
         useToggleDisplaySmiley={useToggleDisplaySmiley}
+        isDrawing={isDrawing}
+        toggleIsDrawing={toggleIsDrawing}
       />
       <FooterControls
         clearButton={clearButton}

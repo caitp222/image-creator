@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import DrawingCanvas from './drawingCanvas';
 import frameLandscape from '../../public/images/frameLandscape.png';
 import smiley from '../../public/images/smiley.png';
 
@@ -8,7 +9,8 @@ const ImageCanvas = (props) => {
     displayFrame,
     displaySmiley,
     smileyLocation,
-    updateSmileyLocation
+    updateSmileyLocation,
+    isDrawing
   } = props;
 
   const handleDragOver = (evt) => {
@@ -40,6 +42,9 @@ const ImageCanvas = (props) => {
       onDrop={handleDrop}
     >
       <img src={imageSrc} id="image" />
+      <DrawingCanvas
+        isDrawing={isDrawing}
+      />
       {
         displayFrame ?
         <img

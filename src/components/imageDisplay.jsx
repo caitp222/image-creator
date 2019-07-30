@@ -13,6 +13,8 @@ const ImageDisplay = () => {
   const [ smileyLocation, updateSmileyLocation ] = useState([160,160]);
   const [ isDrawing, updateIsDrawing ] = useState(false);
 
+  const downloadImage = ImageHelpers.downloadImage.bind(null, displayFrame, displaySmiley, smileyLocation);
+
   const useDisplayNewImage = () => {
     const reader = new FileReader();
     const file = document.querySelector('#file').files[0];
@@ -44,7 +46,11 @@ const ImageDisplay = () => {
       updateDisplayFrame(false);
     };
     clearButton = <Icon onClick={clearImage} innerText={"delete_outline"} />;
-    downloadButton = <Icon onClick={ImageHelpers.downloadImage} innerText={"save_alt"} />;
+    downloadButton = <Icon
+      onClick={downloadImage}
+      // onClick={(displayFrame, displaySmiley) => ImageHelpers.downloadImage(e, displayFrame, displaySmiley)}
+      innerText={"save_alt"}
+    />;
   }
 
   return(

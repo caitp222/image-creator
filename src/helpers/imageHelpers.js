@@ -1,4 +1,4 @@
-export const downloadImage = () => {
+export const downloadImage = (displayFrame, displaySmiley, smileyLocation) => {
   const image = document.querySelector('#image');
   const frame = document.querySelector('#frame');
   const smiley = document.querySelector('#smiley');
